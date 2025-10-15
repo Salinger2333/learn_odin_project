@@ -44,3 +44,12 @@ IIFE 的主要好处：创建独立的作用域
 
 // 在函数外部，访问不到 myName
 // console.log(myName); // 会报错: myName is not defined
+
+
+如果我们希望返回的表达式跨越多行，我们应该从与 return 相同的行开始。或者至少将开头的括号放在那里，如下所示：
+
+return (
+  some + long + expression
+  + or +
+  whatever * f(a) + f(b)
+  )
