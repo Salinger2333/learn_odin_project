@@ -17,3 +17,11 @@ let showPrimes = function (limit) {
     }
 }
 
+
+let capitalize = (string) => {
+    return string.at(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
+let lastLetter = (string) => {
+    return string.at(-1)
+}

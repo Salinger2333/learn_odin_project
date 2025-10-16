@@ -53,3 +53,27 @@ return (
   + or +
   whatever * f(a) + f(b)
   )
+
+
+
+  ## var和let
+  https://stackoverflow.com/questions/762011/what-is-the-difference-between-let-and-var#:~:text=The%20main%20difference%20is%20scoping,(hence%20the%20block%20scope)
+  主要区别在于作用域规则。用 var 关键字声明的变量的作用域是其直接所在的函数体（因此是函数作用域），而 let 变量的作用域是其直接所在的块（由 { } 表示）（因此是块作用域）。
+
+function run() {
+  var foo = "Foo";
+  let bar = "Bar";
+
+  console.log(foo, bar); // Foo Bar
+
+  {
+    var moo = "Mooo"
+    let baz = "Bazz";
+    console.log(moo, baz); // Mooo Bazz
+  }
+
+  console.log(moo); // Mooo
+  console.log(baz); // ReferenceError
+}
+
+run();
