@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="search" type="text">
+    <button>search</button>
+    <div class="output"></div>
+
+</body>
+<script>
+    // const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
+    // const upperCats = cats.map((cats) => {
+    //     return cats.toUpperCase()
+    // })
+    // console.log(upperCats);
+    // const filteredCats = cats.filter((cats) => {
+    //     return cats.startsWith("L")
+    // })
+    // console.log(filteredCats);
+
+    // for (const cat of cats) {
+    //     console.log(`my love cat is ${cat}`);
+    // }
+
+    // const input = document.querySelector("input")
+    // console.dir(input);
+    // const btn = document.querySelector("button")
+    // btn.addEventListener("click", () => {
+    //     console.log(input.value);
+    //     input.value = ""
+    // })
+
+    const output = document.querySelector(".output");
+    output.textContent = "";
+    for (let i = 10; i >= 0; i--) {
+        const para = document.createElement('p');
+        if (i == 10) {
+            output.appendChild(para)
+            para.textContent = "Countdown 10";
+        } else if (i == 0) {
+            output.appendChild(para)
+            para.textContent = "Blast off";
+
+        } else {
+            output.appendChild(para)
+            para.textContent = `${i}`;
+        }
+
+    }
+    let inputNumber;
+    do {
+        inputNumber = window.prompt("input number more than 100 plz", 0)
+    } while (+inputNumber <= 100 && inputNumber);
+
+
+    // const para = document.createElement('p');
+    // para.textContent = ;
+    // output.appendChild(para);
+
+
+
+</script>
+
+</html>
