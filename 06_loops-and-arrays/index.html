@@ -58,13 +58,14 @@
         inputNumber = window.prompt("input number more than 100 plz", 0)
     } while (+inputNumber <= 100 && inputNumber);
 
-
-    // const para = document.createElement('p');
-    // para.textContent = ;
-    // output.appendChild(para);
-
-
-
+    const sumOfTripledEvens = function (array) {
+        return array
+            .filter((item) => item % 2 === 0)
+            .map((item) => item * 3)
+            .reduce((initialValue, current) => initialValue + current, 0)
+    }
+    const arr = [1, 2, 3, 4, 5]
+    console.log(sumOfTripledEvens(arr));
 </script>
 
 </html>
