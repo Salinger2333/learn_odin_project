@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 1. 这是那个透明的、覆盖全屏的恶意链接 -->
+    <a href="https://malicious-spam-site.com" class="malicious-overlay"></a>
+
+    <!-- 2. 这是用户看到的正常内容，实际上被盖在了下面 -->
+    <div class="normal-content">
+        <h1>欢迎来到我的网站</h1>
+        <p>这是一个非常有用的网站，请随意点击浏览。</p>
+        <button>点击这里获取资料</button>
+        <p>或者点击下面的链接了解更多。</p>
+        <a href="https://legitimate-site.com">这是一个正常的链接</a>
+    </div>
+</body>
+<style>
+    /* 这是正常页面的样式，不重要 */
+    body {
+        font-family: sans-serif;
+        text-align: center;
+    }
+
+    .normal-content {
+        padding: 20px;
+    }
+
+    /* --- 这是关键的恶意代码 --- */
+    .malicious-overlay {
+        /* 1. 使用固定定位，脱离文档流，以便覆盖所有内容 */
+        position: fixed;
+
+        /* 2. 从左上角开始 */
+        top: 0;
+        left: 0;
+
+        /* 3. 宽度和高度都100%，占满整个浏览器窗口 */
+        width: 100vw;
+        /* 100% of viewport width */
+        height: 100vh;
+        /* 100% of viewport height */
+
+        /* 4. 将其层级提到最高，确保它在所有元素的上面 */
+        z-index: 99999;
+
+        /* 5. 使其完全透明，用户看不见它！(也可以用 opacity: 0;) */
+        background-color: transparent;
+
+        /* (可选) 去掉鼠标指针，让用户更难察觉 */
+        cursor: default;
+    }
+</style>
+
+</html>

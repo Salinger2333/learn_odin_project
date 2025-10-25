@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="shopping-list">
+        <li id="apple">苹果</li>
+        <li id="banana">香蕉</li>
+        <li id="milk">牛奶</li>
+        <!-- 之后可能会动态添加更多项 -->
+    </ul>
+
+
+    <!-- <div class="content">
+        <button id="submit-btn">提交</button>
+    </div>
+
+    <div id="modal-overlay" class="visible">
+        <div id="modal-box">
+            <p>这是一个模态框</p>
+        </div>
+    </div> -->
+</body>
+<script>
+    const list = document.querySelector("#shopping-list")
+    list.addEventListener("click", (event) => {
+        let target = event.target
+        switch (target.id) {
+            case 'apple':
+                console.log("this is apple");
+                break
+            case 'banana':
+                console.log('this is banana');
+                break
+            case 'milk':
+                console.log('this is milk');
+                break
+        }
+
+
+    })
+
+    // const overlay = document.getElementById('modal-overlay');
+    // const modalBox = document.getElementById('modal-box');
+
+    // document.addEventListener('click', function (event) {
+    //     // 如果模态框是可见的，并且点击的目标不在模态框内部
+    //     if (overlay.classList.contains('visible') && !modalBox.contains(event.target)) {
+
+    //         // 1. 关闭模态框
+    //         overlay.classList.remove('visible');
+
+    //         // 2. 阻止事件继续向下传播到它本该去的目标（比如那个“提交”按钮）
+    //         event.stopPropagation();
+    //     }
+    // }, true); // 注意！第三个参数为 true，表示在捕获阶段执行
+</script>
+
+</html>

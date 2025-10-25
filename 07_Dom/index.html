@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- your HTML file: -->
+
+    <body>
+        <h1>THE TITLE OF YOUR WEBPAGE</h1>
+        <div id="container"></div>
+        <button class="click" id="click1" onclick="alert('fuck you')">click1</button>
+        <button class="click" id="click2">click2</button>
+        <button class="click" id="click3">click3</button>
+
+        <input id="message"></input>
+    </body>
+
+</body>
+<script defer>
+    // your JavaScript file
+    const container = document.querySelector("#container");
+
+    const content = document.createElement("div");
+    content.classList.add("content");
+    content.textContent = "This is the glorious text-content!";
+
+    container.appendChild(content);
+
+
+    // homework
+    const btn2 = document.querySelector('#click2')
+    btn2.onclick = () => alert("fuck you")
+    const btn3 = document.querySelector("#click3")
+    btn3.addEventListener("click", (e) => console.log(e.target))
+
+
+
+
+    const p1 = document.createElement("p")
+    p1.style.color = "red"
+    p1.innerText = "Hey I'm red!"
+    container.appendChild(p1)
+
+    const h3 = document.createElement("h3")
+    h3.style.color = "blue"
+    h3.innerText = "I'm a blue h3!!"
+    container.appendChild(h3)
+
+    const div = document.createElement('div')
+    div.setAttribute("style", "border-color:black;background-color:pink;border-style:solid;")
+
+    // // --- 点击事件演示 ---
+
+    // // 方法 1: 使用 onclick 属性
+    // const btn1 = document.createElement('button');
+    // btn1.textContent = '方法 1';
+    // btn1.onclick = () => alert('按钮 1 被点击');
+    // container.appendChild(btn1);
+
+    // // 方法 2: 使用 addEventListener 和一个已命名的函数
+    // const btn2 = document.createElement('button');
+    // btn2.textContent = '方法 2';
+    // function alertFunction() {
+    //     alert('按钮 2 被点击');
+    // }
+    // btn2.addEventListener('click', alertFunction);
+    // container.appendChild(btn2);
+
+    // // 方法 3: 使用 addEventListener 和一个匿名函数
+    // const btn3 = document.createElement('button');
+    // btn3.textContent = '方法 3';
+    // btn3.addEventListener('click', () => alert('按钮 3 被点击'));
+    // container.appendChild(btn3);
+
+
+    const h1 = document.createElement("h1")
+    h1.innerText = "I'm in a div"
+    const p2 = document.createElement("p")
+    p2.innerText = "ME TOO!"
+    div.appendChild(h1)
+    div.appendChild(p2)
+    container.appendChild(div)
+
+
+
+
+
+
+    let message = document.querySelector('#message')
+    message.addEventListener('keydown', (event) => {
+        return console.log(`${event.key} + ${event.code}`);
+    })
+
+
+
+
+
+
+</script>
+
+</html>

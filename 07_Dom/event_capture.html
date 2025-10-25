@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件捕获模型示例 - 模态框</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>页面主要内容</h1>
+    <p>点击下面的按钮可以提交表单，或者打开模态框。</p>
+
+    <div class="content">
+        <button id="submit-btn">提交表单 (在模态框后面)</button>
+        <button id="open-modal-btn">打开模态框</button>
+    </div>
+
+    <!-- 模态框结构 -->
+    <div id="modal-overlay" class="hidden">
+        <div id="modal-box">
+            <h2>这是一个模态框</h2>
+            <p>点击模态框内部的任何地方，它都不会关闭。</p>
+            <p>点击模态框外部的灰色区域，它将会关闭。</p>
+            <button id="close-modal-btn">或者点我关闭</button>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+
+<style>
+    body {
+        font-family: sans-serif;
+        margin: 20px;
+    }
+
+    .content button {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* 模态框遮罩层 */
+    #modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        /* 半透明黑色背景 */
+
+        /* 使用 Flexbox 轻松实现垂直水平居中 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /* 过渡效果 */
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* 模态框内容盒子 */
+    #modal-box {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 400px;
+        transform: scale(1);
+        transition: transform 0.3s ease;
+    }
+
+    /* 用于隐藏模态框的类 */
+    #modal-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #modal-overlay.hidden #modal-box {
+        transform: scale(0.9);
+    }
+</style>
+
+<script>
+    // 等待 DOM 加载完成
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // 1. 获取所有需要的元素
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalBox = document.getElementById('modal-box');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // 2. 定义打开和关闭模态框的函数
+        const openModal = () => {
+            modalOverlay.classList.remove('hidden');
+        };
+
+        const closeModal = () => {
+            modalOverlay.classList.add('hidden');
+        };
+
+        // 3. 为相关按钮绑定常规的点击事件 (冒泡阶段)
+        openModalBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        submitBtn.addEventListener('click', () => {
+            alert('表单已提交！');
+        });
+
+        // --- 核心逻辑：利用事件捕获 ---
+        // 在整个 document 上添加一个捕获阶段的点击监听器
+        document.addEventListener('click', (event) => {
+            // 检查模态框是否可见
+            const isModalVisible = !modalOverlay.classList.contains('hidden');
+
+            if (isModalVisible) {
+                // event.target 是用户实际点击的元素
+                // modalBox.contains(node) 会检查 node 是否是 modalBox 的后代元素
+                // 如果点击的目标不是模态框本身或其内部元素，则关闭模态框
+                if (!modalBox.contains(event.target)) {
+
+                    console.log('点击发生在模态框外部，执行关闭操作。');
+                    closeModal();
+
+                    // 关键一步：阻止事件继续传播
+                    // 这会阻止事件进入目标阶段和冒泡阶段。
+                    // 因此，位于模态框下方的 "提交表单" 按钮的点击事件将不会被触发。
+                    event.stopPropagation();
+                    console.log('事件传播已被阻止！');
+                } else {
+                    console.log('点击发生在模态框内部，不执行任何操作。');
+                }
+            }
+        }, true); // 第三个参数为 true，表示在 "捕获阶段" 监听事件
+
+    });
+</script>
