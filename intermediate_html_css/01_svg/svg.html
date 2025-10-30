@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- <svg width="280" height="280">
+        <line x1="20" y1="20" x2="80" y2="80" stroke="oklch(0.9 0.3 164)" stroke-width="5" />
+    </svg>
+    <svg width="300" height="300">
+        <rect x="60" y="100" width="180" height="100" fill="none" stroke="oklch(0.9 0.3 164)" stroke-width="5" />
+    </svg> -->
+    <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="50" />
+    </svg>
+
+    <style>
+        circle {
+            fill: aquamarine;
+            stroke: chocolate;
+            stroke-width: 10px;
+            stroke-dasharray: 0 20 26 60;
+            stroke-linecap: round;
+
+
+            transition:
+                stroke 1200ms,
+                stroke-width 900ms,
+                stroke-dasharray 1500ms,
+                stroke-linecap 1000ms;
+
+        }
+
+        circle:hover {
+            stroke: blueviolet;
+            stroke-width: 20px;
+            stroke-dasharray: 60 26 20 0;
+        }
+    </style>
+</body>
+
+</html>
