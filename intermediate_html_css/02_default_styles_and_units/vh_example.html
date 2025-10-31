@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>My<strong>Application</strong></h1>
+
+    <div class="container">
+        <nav>
+            <h2>My Projects</h2>
+            <ul>
+                <li><a href="#"></a>Project 1</a></li>
+                <li><a href="#"></a>Project 2</a></li>
+                <li><a href="#"></a>Project 3</a></li>
+                <li><a href="#"></a>Project 4</a></li>
+                <li><a href="#"></a>Project 5</a></li>
+                <li><a href="#"></a>Project 6</a></li>
+                <li><a href="#"></a>Project 7</a></li>
+                <li><a href="#"></a>Project 8</a></li>
+                <li><a href="#"></a>Project 9</a></li>
+                <li><a href="#"></a>Project 10</a></li>
+            </ul>
+        </nav>
+        <article>
+            <h2>Edit the HTML to make content shorter or longer</h2>
+            <p>
+                All the main content lives in here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius
+                cumque, nihil nesciunt qui ea vero consequatur, dignissimos maxime ratione itaque amet, ab aliquid
+                recusandae illo quibusdam debitis? Deserunt, saepe.
+            </p>
+            <p>
+                All the main content lives in here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius
+                cumque, nihil nesciunt qui ea vero consequatur, dignissimos maxime ratione itaque amet, ab aliquid
+                recusandae illo quibusdam debitis? Deserunt, saepe.
+            </p>
+            <p>
+                All the main content lives in here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius
+                cumque, nihil nesciunt qui ea vero consequatur, dignissimos maxime ratione itaque amet, ab aliquid
+                recusandae illo quibusdam debitis? Deserunt, saepe.
+            </p>
+        </article>
+    </div>
+
+    <footer>
+        Copyright (c) 1017 Nobody Ever
+    </footer>
+</body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-collapse: collapse;
+        text-decoration: none;
+    }
+
+    html,
+    body {
+        height: 100%;
+        /* 确保html和body占满全屏 */
+        font-family: sans-serif;
+        overflow: hidden;
+        /* 关键：防止body本身出现滚动条 */
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .container {
+        display: flex;
+        padding: 10vh 1rem;
+        flex: 1;
+        justify-content: space-evenly;
+    }
+
+    nav {
+        border: 2px solid yellowgreen;
+        flex: auto;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    article {
+        border: 2px solid yellowgreen;
+        flex: auto;
+    }
+
+    footer {
+        flex-shrink: 0;
+    }
+</style>
+
+</html>
