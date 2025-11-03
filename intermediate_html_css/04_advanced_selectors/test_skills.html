@@ -11,15 +11,17 @@
     <div class="container">
         <h1>This is a heading</h1>
         <p>
-            Veggies es <span>bonus vobis</span>, proinde vos postulo essum magis
-            kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean
-            garlic.
+            Veggies es <span class="alert">bonus vobis</span>, proinde vos postulo
+            <span class="alert stop">essum magis</span> kohlrabi welsh onion daikon
+            amaranth tatsoi tomatillo melon azuki bean garlic.
         </p>
-        <h2>A level 2 heading</h2>
+        <h2 id="special">A level 2 heading</h2>
+        <p>Gumbo beet greens corn soko endive gumbo gourd.</p>
+        <h2>Another level 2 heading</h2>
         <p>
-            Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette
-            tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato.
-            Dandelion cucumber earthnut pea peanut soko zucchini.
+            <span class="alert go">Parsley shallot</span> courgette tatsoi pea sprouts
+            fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber
+            earthnut pea peanut soko zucchini.
         </p>
     </div>
 
@@ -28,18 +30,22 @@
             font: 1.2em / 1.5 sans-serif;
         }
 
+
         /* Add styles here */
-        h1 {
-            color: blue;
+        #special {
+            background-color: yellow;
         }
 
-        h2 {
-            color: white;
-            background-color: blue;
+        .alert {
+            border: 2px solid grey;
         }
 
-        span {
-            font-size: 200%;
+        .alert.stop {
+            background-color: red;
+        }
+
+        .alert.go {
+            background-color: green;
         }
     </style>
 </body>
