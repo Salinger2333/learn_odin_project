@@ -9,20 +9,44 @@
 
 <body>
     <div class="container">
-        <h1>This is a heading</h1>
         <p>
-            Veggies es <span class="alert">bonus vobis</span>, proinde vos postulo
-            <span class="alert stop">essum magis</span> kohlrabi welsh onion daikon
-            amaranth tatsoi tomatillo melon azuki bean garlic.
+            Veggies es <a href="http://example.com">bonus vobis</a>, proinde vos postulo
+            essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon
+            azuki bean garlic.
         </p>
-        <h2 id="special">A level 2 heading</h2>
-        <p>Gumbo beet greens corn soko endive gumbo gourd.</p>
-        <h2>Another level 2 heading</h2>
         <p>
-            <span class="alert go">Parsley shallot</span> courgette tatsoi pea sprouts
-            fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber
-            earthnut pea peanut soko zucchini.
+            Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette
+            tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato.
+            Dandelion cucumber earthnut pea peanut soko zucchini.
         </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Fruits</th>
+                    <th>Vegetables</th>
+                </tr>
+                <tr>
+                    <td>Apple</td>
+                    <td>Potato</td>
+                </tr>
+                <tr>
+                    <td>Orange</td>
+                    <td>Carrot</td>
+                </tr>
+                <tr>
+                    <td>Tomato</td>
+                    <td>Parsnip</td>
+                </tr>
+                <tr>
+                    <td>Kiwi</td>
+                    <td>Onion</td>
+                </tr>
+                <tr>
+                    <td>Banana</td>
+                    <td>Beet</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <style>
@@ -30,22 +54,42 @@
             font: 1.2em / 1.5 sans-serif;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+        }
+
+        td,
+        th {
+            padding: 0.2em;
+            text-align: left;
+        }
 
         /* Add styles here */
-        #special {
-            background-color: yellow;
+        a {
+            color: orange;
         }
 
-        .alert {
-            border: 2px solid grey;
+        a:visited {
+            color: green;
         }
 
-        .alert.stop {
-            background-color: red;
+        a:hover {
+            text-decoration: none;
         }
 
-        .alert.go {
-            background-color: green;
+        .container>*:first-child {
+            font-size: 150%;
+            color: red;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #333333;
+            color: white;
         }
     </style>
 </body>
