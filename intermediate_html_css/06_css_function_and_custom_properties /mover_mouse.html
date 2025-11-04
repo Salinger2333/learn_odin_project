@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>move</title>
+</head>
+
+<body>
+    <div class="mouse"></div>
+    <script>
+        let root = document.documentElement
+        document.addEventListener('mousemove', (e) => {
+            root.style.setProperty('--left', e.clientX + 'px')
+            root.style.setProperty('--top', e.clientY + 'px')
+        })
+    </script>
+    <style>
+        :root {
+            --left: 0px;
+            --top: 0px;
+        }
+
+        .mouse {
+            width: 50px;
+            height: 50px;
+            background: red;
+            position: absolute;
+            left: calc(var(--left) - 25px);
+            top: calc(var(--top) - 25px);
+        }
+    </style>
+</body>
+
+</html>

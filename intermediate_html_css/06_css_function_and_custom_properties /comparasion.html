@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 自定义变量方案对比</title>
+    <style>
+        /* --- 1. 基础和布局样式 (两种方案共用) --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #111;
+        }
+
+        h1 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 1rem;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .method-section {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .plan-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* --- 2. 组件基础样式 (两种方案共用) --- */
+        .plan {
+            position: relative;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            overflow: hidden;
+            background-color: #ffffff;
+            z-index: 1;
+        }
+
+        /* 模拟视频中的背景色块 */
+        .plan::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: #eee;
+            /* 默认后备色 */
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
+        }
+
+        .plan__icon {
+            width: 50px;
+            height: 50px;
+            fill: #888;
+            /* 默认后备色 */
+        }
+
+        .plan__title {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #222;
+        }
+
+        .plan__button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #eee;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* --- 
+           方案一：不推荐的“浪费”方案
+           特点：为每个主题的每个子元素都编写一个选择器。 
+        --- */
+
+        /* 黄色主题 */
+        .bad-way .plan--yellow::before {
+            background-color: #fef08a;
+        }
+
+        .bad-way .plan--yellow .plan__icon {
+            fill: #ca8a04;
+        }
+
+        .bad-way .plan--yellow .plan__button:hover {
+            background-color: #ca8a04;
+            color: white;
+        }
+
+        /* 青色主题 */
+        .bad-way .plan--cyan::before {
+            background-color: #a5f3fc;
+        }
+
+        .bad-way .plan--cyan .plan__icon {
+            fill: #0891b2;
+        }
+
+        .bad-way .plan--cyan .plan__button:hover {
+            background-color: #0891b2;
+            color: white;
+        }
+
+        /* 紫色主题 */
+        .bad-way .plan--purple::before {
+            background-color: #e9d5ff;
+        }
+
+        .bad-way .plan--purple .plan__icon {
+            fill: #9333ea;
+        }
+
+        .bad-way .plan--purple .plan__button:hover {
+            background-color: #9333ea;
+            color: white;
+        }
+
+        /* --- 
+           方案二：推荐的“本地作用域”方案
+           特点：在父组件上定义变量“接口”，子元素引用这些变量。
+                 主题修饰符 (plan--yellow) 只负责更新变量的值。
+        --- */
+
+        /* 1. 在基础组件上定义“私有”变量，并让它们引用“公开”变量（带后备值） */
+        .good-way .plan {
+            /* --_bg-color 是组件内部使用的“私有”变量 (约定以下划线开头)
+             它会尝试获取 --bg-color 的值，如果获取不到，就使用后备值 #eee
+            */
+            --_bg-color: var(--bg-color, #eee);
+            --_icon-color: var(--icon-color, #888);
+            --_button-hover-color: var(--button-hover-color, #333);
+            --_button-hover-text: var(--button-hover-text, white);
+        }
+
+        /* 2. 子元素样式只定义一次，且只引用“私有”变量 */
+        .good-way .plan::before {
+            background-color: var(--_bg-color);
+        }
+
+        .good-way .plan__icon {
+            fill: var(--_icon-color);
+        }
+
+        .good-way .plan__button:hover {
+            background-color: var(--_button-hover-color);
+            color: var(--_button-hover-text);
+        }
+
+        /* 3. 定义主题（变体）
+           注意看：这里没有子元素选择器 (如 .plan__icon)。
+           我们只在父级上设置“公开”变量的值。
+           这就像在操作一个组件的“控制面板”。
+        */
+
+        /* 黄色主题 */
+        .good-way .plan--yellow {
+            --bg-color: #fef08a;
+            --icon-color: #ca8a04;
+            --button-hover-color: #ca8a04;
+        }
+
+        /* 青色主题 */
+        .good-way .plan--cyan {
+            --bg-color: #a5f3fc;
+            --icon-color: #0891b2;
+            --button-hover-color: #0891b2;
+        }
+
+        /* 紫色主题 */
+        .good-way .plan--purple {
+            --bg-color: #e9d5ff;
+            --icon-color: #9333ea;
+            --button-hover-color: #9333ea;
+        }
+
+        /* --- 响应式布局 --- */
+        @media (max-width: 900px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS 自定义变量方案对比</h1>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+        这个页面演示了视频中提到的两种 CSS 方案。两种方案的 <strong>HTML 结构完全相同</strong>，但 CSS 实现方式不同。
+        <br>
+        <strong>请重点阅读 CSS 代码中的注释来理解差异。</strong>
+    </p>
+
+    <div class="comparison-container">
+        <section class="method-section bad-way">
+            <h2>方案一：不推荐的“浪费”方案</h2>
+            <p><strong>CSS 实现：</strong>为每个主题（黄、青、紫）都单独编写了针对 <code>::before</code>、<code>.plan__icon</code> 和
+                <code>.plan__button:hover</code> 的选择器。导致代码量大且难以维护。</p>
+            <div class="plan-wrapper">
+
+                <div class="plan plan--yellow">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">黄色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+                <div class="plan plan--cyan">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">青色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+                <div class="plan plan--purple">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">紫色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="method-section good-way">
+            <h2>方案二：推荐的“本地作用域”方案</h2>
+            <p><strong>CSS 实现：</strong>子元素 (图标、背景、按钮) 的样式<strong>只定义了一次</strong>，它们引用 <code>--_private</code> 变量。主题修饰符
+                (<code>.plan--yellow</code>) 只需更新 <code>--public</code> 变量的值即可。</p>
+            <div class="plan-wrapper">
+
+                <div class="plan plan--yellow">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">黄色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+                <div class="plan plan--cyan">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">青色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+                <div class="plan plan--purple">
+                    <svg class="plan__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <h3 class="plan__title">紫色主题</h3>
+                    <button class="plan__button">悬停我</button>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>
