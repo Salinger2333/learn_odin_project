@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <label for="mail">
+            I would like you to provide me with an email address:
+        </label>
+        <input type="email" id="mail" name="mail" />
+        <button>Submit</button>
+    </form>
+    <form>
+        <label for="mail">Email address (@example.com only):</label>
+        <input type="email" id="mail2" />
+        <button>Submit</button>
+    </form>
+    <script>
+        const email = document.querySelector('input#mail')
+        email.addEventListener('input', (e) => {
+            if (email.validity.typeMismatch) {
+                console.log(email);
+                email.setCustomValidity('im expecting a right email')
+            } else {
+                email.setCustomValidity('')
+            }
+        })
+        const email2 = document.querySelector('input#mail2')
+        email2.addEventListener('input', (e) => {
+            email2.setCustomValidity('')
+            if (!email2.validity.valid) {
+                return
+            }
+            if (!email2.value.endsWith('@example.com')) {
+                email2.setCustomValidity('Please enter an email address of @example.com')
+            }
+        })
+    </script>
+</body>
+
+</html>
