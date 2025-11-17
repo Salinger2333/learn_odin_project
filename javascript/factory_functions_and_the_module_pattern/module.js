@@ -22,7 +22,8 @@ const Formatter = (function () {
     return {
         makeUpperCase,
         getTimesRun,
-        setTimesRun
+        setTimesRun,
+        timesRun
     }
 })();
 console.log(Formatter.makeUpperCase('google ai studio'));
@@ -45,7 +46,7 @@ const DomFormatter = (function (doc) {
     return {
         writeToDom
     }
-})(document || docMock)
+})(  docMock || document)
 
 
 
