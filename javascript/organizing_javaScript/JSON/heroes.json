@@ -1,0 +1,40 @@
+{
+    "squadName": "S-Class Heroes",
+    "homeTown": "City A",
+    "formed": 2017,
+    "secretBase": "Hero Association HQ",
+    "active": true,
+    "members": [
+        {
+            "name": "Terrible Tornado",
+            "age": 28,
+            "secretIdentity": "Tatsumaki",
+            "powers": [
+                "Psychokinesis",
+                "Flight",
+                "Psychic Barriers"
+            ]
+        },
+        {
+            "name": "Silver Fang",
+            "age": 81,
+            "secretIdentity": "Bang",
+            "powers": [
+                "Water Stream Rock Smashing Fist",
+                "Superhuman Agility",
+                "Flowing Water Aura"
+            ]
+        },
+        {
+            "name": "Demon Cyborg",
+            "age": 19,
+            "secretIdentity": "Genos",
+            "powers": [
+                "Incineration Cannons",
+                "Machine Gun Blows",
+                "Core Overcharge",
+                "Rocket Boosters"
+            ]
+        }
+    ]
+}
