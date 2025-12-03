@@ -6,23 +6,97 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="" method="post">
-      <label for="mail">
-        I would like you to provide me with an email address:</label
-      >
-      <input id="mail" type="email" />
-      <button>submit</button>
+    <style>
+      body {
+        font: 1em sans-serif;
+        width: 200px;
+        padding: 0;
+        margin: 0 auto;
+      }
+
+      p * {
+        display: block;
+      }
+
+      input[type="email"] {
+        appearance: none;
+
+        width: 100%;
+        border: 1px solid #333333;
+        margin: 0;
+
+        font-family: inherit;
+        font-size: 90%;
+
+        box-sizing: border-box;
+      }
+
+      /* invalid fields */
+      input:invalid {
+        border-color: #990000;
+        background-color: #ffdddd;
+      }
+
+      input:focus:invalid {
+        outline: none;
+      }
+
+      /* error message styles */
+      .error {
+        width: 100%;
+        padding: 0;
+
+        font-size: 80%;
+        color: white;
+        background-color: #990000;
+        border-radius: 0 0 5px 5px;
+
+        box-sizing: border-box;
+      }
+
+      .error.active {
+        padding: 0.3em;
+      }
+    </style>
+    <form novalidate>
+      <p>
+        <label for="mail">
+          <span>Please enter an email address *:</span>
+          <input type="email" id="mail" name="mail" required minlength="8" />
+          <span class="error"></span>
+        </label>
+      </p>
+      <button>Submit</button>
     </form>
   </body>
   <script>
-    const email = document.querySelector("#mail");
-    const btn = document.querySelector("button");
-    email.addEventListener("input", (e) => {
-      if(email.validity.typeMismatch){
-        email.setCustomValidity("i'm expecting a correct email and fuck you")
+    const form = document.querySelector("form");
+    const email = document.getElementById("mail");
+    const emailError = document.querySelector("#mail + span.error");
+    email.addEventListener("input", (event) => {
+      if (email.validity.valid) {
+        emailError.textContent = "";
+        emailError.className = "error";
       } else {
-        email.setCustomValidity("")
+        showError();
       }
     });
+    form.addEventListener("submit", (event) => {
+      if (!email.validity.valid) {
+        showError()
+        event.preventDefault();
+      }
+    });
+    function showError() {
+      if (email.validity.valueMissing) {
+        emailError.textContent = "u need type something";
+      } else if (email.validity.typeMismatch) {
+        emailError.textContent = "bad format";
+      } else if (email.validity.tooShort) {
+        emailError.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
+      }
+
+      emailError.className = "error active";
+    }
   </script>
 </html>
