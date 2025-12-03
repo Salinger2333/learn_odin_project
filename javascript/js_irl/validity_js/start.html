@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      <label for="mail">
+        I would like you to provide me with an email address:</label
+      >
+      <input id="mail" type="email" />
+      <button>submit</button>
+    </form>
+  </body>
+  <script>
+    const email = document.querySelector("#mail");
+    const btn = document.querySelector("button");
+    email.addEventListener("input", (e) => {
+      if(email.validity.typeMismatch){
+        email.setCustomValidity("i'm expecting a correct email and fuck you")
+      } else {
+        email.setCustomValidity("")
+      }
+    });
+  </script>
+</html>
