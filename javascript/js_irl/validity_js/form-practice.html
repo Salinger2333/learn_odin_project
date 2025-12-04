@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contaienr">
+      <form action="" method="post" novalidate>
+        <div class="form-row">
+          <h2>Create Account</h2>
+        </div>
+        <div class="form-row">
+          <label for="">Email</label>
+          <input type="email" />
+          <span class="error"></span>
+        </div>
+        <div class="form-row">
+          <label for="">Country</label>
+          <input type="text" />
+          <span class="error"></span>
+        </div>
+        <div class="form-row">
+          <label for="">Postal Code</label>
+          <input type="text" />
+          <span class="error"></span>
+        </div>
+        <div class="form-row">
+          <label for="">Password</label>
+          <input type="password" />
+          <span class="error"></span>
+        </div>
+        <div class="form-row">
+          <label for="">Comfired Password</label>
+          <input type="password" />
+          <span class="error"></span>
+        </div>
+      </form>
+    </div>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #f4f4f9;
+      }
+
+      .contaienr {
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+      }
+      .contaienr > form {
+        padding-top: 50px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        gap: 3rem;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      }
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-row input {
+        appearance: none;
+
+        width: 60%;
+        height: 2rem;
+        border: solid 2px #c9cbd2;
+        border-radius: 0.5rem;
+      }
+    </style>
+  </body>
+</html>
