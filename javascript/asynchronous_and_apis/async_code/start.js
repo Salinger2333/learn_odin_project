@@ -1,10 +1,7 @@
-Promise.resolve().then(() => console.log(1));
+function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve,ms)
+  });
+}
 
-setTimeout(() => console.log(2), 0);
-
-queueMicrotask(() => {
-  console.log(3);
-  queueMicrotask(() =>  console.log(4));
-});
-
-console.log(5);
+delay(3000).then(() => alert('runs after 3 seconds'));
