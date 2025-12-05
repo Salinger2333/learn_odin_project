@@ -10,22 +10,31 @@
     <script>
       const img = document.querySelector("img");
       const btn = document.querySelector("button");
-      const getImg = () => {
-        fetch(
+      // const getCat = async () => {
+      // fetch(
+      //   "https://api.giphy.com/v1/gifs/translate?api_key=Awgvgm7RM7bcdTe0GKw9NaAgpvbdgIxc&s=cats"
+      // )
+      //   .then(function (response) {
+      //     if (!response.ok) {
+      //       throw new Error("error");
+      //     }
+      //     return response.json();
+      //   })
+      //   .then(function (response) {
+      //     img.src = response.data.images.original.url;
+      //   })
+      //   .catch((error) => console.log(error));
+      // };
+      const getCat = async () => {
+        const response = await fetch(
           "https://api.giphy.com/v1/gifs/translate?api_key=Awgvgm7RM7bcdTe0GKw9NaAgpvbdgIxc&s=cats"
-        )
-          .then(function (response) {
-            if (!response.ok) {
-              throw new Error("error");
-            }
-            return response.json();
-          })
-          .then(function (response) {
-            img.src = response.data.images.original.url;
-          })
-          .catch((error) => console.log(error));
+        );
+        const content = await response.json();
+        const url = await content.data.images.original.url;
+        img.src = url;
       };
-      btn.addEventListener('click', getImg)
+
+      btn.addEventListener("click", getCat);
     </script>
   </body>
 </html>
