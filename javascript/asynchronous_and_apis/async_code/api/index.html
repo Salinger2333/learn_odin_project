@@ -5,18 +5,27 @@
     <title>Document</title>
   </head>
   <body>
+    <button>add img</button>
     <img src="#" />
     <script>
       const img = document.querySelector("img");
-      fetch(
-        "https://api.giphy.com/v1/gifs/translate?api_key=Awgvgm7RM7bcdTe0GKw9NaAgpvbdgIxc&s=cats"
-      )
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          img.src = response.data.images.original.url;
-        });
+      const btn = document.querySelector("button");
+      const getImg = () => {
+        fetch(
+          "https://api.giphy.com/v1/gifs/translate?api_key=Awgvgm7RM7bcdTe0GKw9NaAgpvbdgIxc&s=cats"
+        )
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error("error");
+            }
+            return response.json();
+          })
+          .then(function (response) {
+            img.src = response.data.images.original.url;
+          })
+          .catch((error) => console.log(error));
+      };
+      btn.addEventListener('click', getImg)
     </script>
   </body>
 </html>
