@@ -131,3 +131,20 @@
   }
   console.log(totalIntegers([[[5], 3], 0, 2, [1], ["foo"], [], [4, [5, 6]]]));
 }
+
+
+function totalIntegersNew (arr){
+  let total = 0
+  if(!Array.isArray(arr)){
+    if(typeof arr === 'number'){
+      return ++total
+    }else{
+      return total
+    }
+  }  
+  for(let value of arr) {
+    total += totalIntegersNew(value)
+  }
+  return total
+}
+console.log(totalIntegersNew([[[5], 3], 0, 2, [1], ["foo"], [], [4, [5, 6]]]));
