@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "test": "jest",
-    "wath": "jest --watch *.test.js"
+    "watch": "jest --watch *.test.js"
   },
   "keywords": [],
   "author": "",
