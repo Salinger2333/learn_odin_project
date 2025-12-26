@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="red-box"></div>
+    <div class="blue-box"></div>
+    <div class="green-box"></div>
+    <style>
+      .red-box,
+      .blue-box,
+      .green-box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+      .red-box {
+        background-color: #ed3434;
+        transform: translate(200%) rotate(0.6turn);
+      }
+      .blue-box {
+        background-color: dodgerblue;
+        transform: rotate(45deg) translate(200%);
+      }
+      .green-box {
+        background-color: #3db847;
+        transform: perspective(100px) rotateY(60deg);
+      }
+    </style>
+  </body>
+</html>
