@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffe5;
+      }
+      .ball {
+        width: 150px;
+        height: 150px;
+        background-color: silver;
+        border-radius: 50%;
+
+        animation: change-color 3s infinite alternate;
+      }
+
+      @keyframes change-color {
+        from {
+          background-color: sliver;
+        }
+        50% {
+          transform: scale(150%);
+          background-color: #0d97c1;
+        }
+        to {
+          background-color: #eddd63;
+        }
+      }
+    </style>
+    <div class="container">
+      <div class="ball"></div>
+    </div>
+  </body>
+</html>
