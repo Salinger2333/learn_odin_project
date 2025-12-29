@@ -12,17 +12,89 @@
         padding: 1rem;
         border: 1px solid silver;
         border-radius: 1rem;
+      }
+      .container .hover {
         transition: all 0.5s ease-in-out 0.25s;
       }
-      .container button:hover {
+      .container .hover:hover {
         font-weight: bolder;
         cursor: pointer;
         background-color: dodgerblue;
         transform: translate(10px);
       }
+
+      .ani {
+        font-size: 1.5rem;
+        padding: 20px;
+        border: 3px solid red;
+        border-radius: 20px;
+
+        display: none;
+        opacity: 0;
+        transition: opacity 1s, display 1s allow-discrete;
+      }
+      .showing {
+        opacity: 1;
+        display: block;
+      }
+      @starting-style {
+        .showing {
+          opacity: 0;
+        }
+      }
+
+      .ball {
+        border-radius: 25px;
+        width: 50px;
+        height: 50px;
+        background: #cc0000;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 1s;
+      }
     </style>
     <div class="container">
-      <button>HOVER</button>
+      <button class="hover">HOVER</button>
+      <p>
+        Click anywhere on the screen or press any key to toggle the
+        <code>&lt;div&gt;</code> between hidden and showing.
+      </p>
+
+      <div class="ani">
+        This is a <code>&lt;div&gt;</code> element that transitions between
+        <code>display: none; opacity: 0</code> and
+        <code>display: block; opacity: 1</code>. Neat, huh?
+      </div>
+
+      <p>
+        This is another paragraph to show that <code>display: none;</code> is
+        being applied and removed on the above <code>&lt;div&gt; </code>. If
+        only its <code>opacity</code> was being changed, it would always take up
+        the space in the DOM.
+      </p>
+
+      <p>Click anywhere to move the ball</p>
+      <div id="foo" class="ball"></div>
     </div>
+
+    <script>
+      const divElem = document.querySelector(".ani");
+      const htmlElem = document.querySelector(":root");
+
+      htmlElem.addEventListener("click", showHide);
+      document.addEventListener("keydown", showHide);
+
+      function showHide() {
+        divElem.classList.toggle("showing");
+      }
+
+      // Make the ball move to a certain position:
+      const f = document.getElementById("foo");
+      document.addEventListener("click", (ev) => {
+        f.style.transform = `translateY(${ev.clientY - 25}px)`;
+        f.style.transform += `translateX(${ev.clientX - 25}px)`;
+      });
+    </script>
   </body>
 </html>

@@ -20,6 +20,11 @@
       .red-box {
         background-color: #ed3434;
         transform: translate(200%) rotate(0.6turn);
+        transition: transform 1s;
+      }
+      .red-box:hover {
+        transition: transform 1s 0.2s ease-in;
+        transform: scale(150%);
       }
       .blue-box {
         background-color: dodgerblue;
