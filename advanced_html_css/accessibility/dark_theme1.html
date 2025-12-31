@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      :root {
+        --text-color: #222;
+        --bkg-color: #fff;
+        --anchor-color: #0033cc;
+      }
+      :root.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --anchor-color: #809fff;
+      }
+      body {
+        color: var(--text-color);
+        background-color: var(--bkg-color);
+      }
+      a {
+        color: var(--anchor-color);
+      }
+    </style>
+    <button class="toggle-theme">change theme</button>
+    <h1>Hey there! This is just a title</h1>
+    <p>
+      I am just a boring text, existing here solely for the purpose of this demo
+    </p>
+    <p>
+      And I am just another one like the one above me, because two is better
+      than having only one
+    </p>
+    <a href="#">I am a link, don't click me!</a>
+    <script>
+      const btn = document.querySelector(".toggle-theme");
+      const html = document.documentElement;
+      btn.addEventListener("click", (e) => {
+        html.classList.toggle("dark-theme");
+      });
+    </script>
+  </body>
+</html>
