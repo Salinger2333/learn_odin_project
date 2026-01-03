@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 20rem;
+      }
+      .container div {
+        outline: 2px solid black;
+      }
+      .img-container {
+        background-image: url(flowers.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .ui-login img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+
+    <div class="container">
+      <div class="img-container"></div>
+      <div class="ui-login"><img src="./flowers.jpg" alt="" srcset="" /></div>
+    </div>
+  </body>
+</html>
