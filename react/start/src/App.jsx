@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Greeting, Test } from "./components/Greeting.jsx";
 import { Animals } from "./components/Animals.jsx";
+import { Button } from "./components/Button.jsx";
 
 function List(props) {
   return (
@@ -24,7 +25,9 @@ function List(props) {
 function App() {
   const [count, setCount] = useState(0);
   const animals = ["Lion", "Cow", "Snake", "Lizard"];
-
+  const defaultHandleClick = () => {
+    window.location.href = "https://www.theodinproject.com"
+  }
   return (
     <>
       <p>start learn React</p>
@@ -37,6 +40,9 @@ function App() {
           count is {count}
         </button>
       </div>
+
+      <Button text="Click Me!" color="blue" fontSize={12} handleClick={defaultHandleClick}/>
+
     </>
   );
 }
