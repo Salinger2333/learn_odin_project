@@ -8,9 +8,10 @@ import ClassInput from './components/ClassInput';
 export default function App() {
   return (
     <>
-      <FunctionalInput name="Functional component!" />
+      {/* <FunctionalInput name="Functional component!" />
       <div className="divider" />
-      <ClassInput name="Class based component!" />
+      <ClassInput name="Class based component!" /> */}
+      <h1>hi</h1>
     </>
   );
 }
