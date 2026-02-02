@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { data, NavLink } from "react-router";
+import { NavLink } from "react-router";
 
 const getRequestWithNativeFetch = async (url) => {
   const response = await fetch(url);
