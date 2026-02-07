@@ -1,0 +1,85 @@
+`http.Server` 是你构建 Web 服务器的核心骨架。如果说 `ClientRequest` 是送信的人，那么 `http.Server` 就是负责收信、拆信并指挥回复的 **邮局**。
+
+根据文档，以下是它最核心的 **“三件套”**（事件、方法、属性），掌握这些就足以完成 90% 的基础开发任务。
+
+### 1. 最核心的事件 (Events)
+
+`http.Server` 是基于事件驱动的（EventEmitters）。你通过监听这些事件来处理业务逻辑。
+
+*   **`E 'request'` (最重要)**
+    *   **触发时机**：每次有新的 HTTP 请求进来时触发。
+    *   **回调参数**：`(request, response)`。
+        *   `request` (`http.IncomingMessage`): 客户端发来的信（只读）。
+        *   `response` (`http.ServerResponse`): 你要回给客户端的空白信纸（可写）。
+    *   **注意**：当你使用 `http.createServer((req, res) => { ... })` 时，Node.js 实际上是帮你自动注册了这个事件的监听器。
+
+*   **`E 'clientError'` (错误处理)**
+    *   **触发时机**：当客户端连接发生错误（比如发送了畸形的 HTTP 数据包）时触发。
+    *   **重要性**：如果不监听这个事件，Node.js 默认会直接销毁 socket。在生产环境中，最好监听它来记录错误或向客户端发送一个友好的 "400 Bad Request"。
+
+*   **`E 'close'`**
+    *   **触发时机**：当服务器完全关闭（不再接受新连接，且所有现有连接都断开）时触发。
+
+### 2. 最核心的方法 (Methods)
+
+这些是你用来控制服务器“开关”的操作。
+
+*   **`M server.listen()`**
+    *   **作用**：**启动服务器**。告诉服务器开始在特定的端口（比如 8080）上监听请求。
+    *   **代码**：通常是链式调用的最后一步，如 `.listen(8080)`。
+
+*   **`M server.close([callback])`**
+    *   **作用**：**停止服务器**。它会阻止服务器接受 *新的* 连接，但会允许 *现有的* 连接处理完毕。
+    *   **场景**：在更新代码重启服务，或者程序退出时使用，实现“优雅退出”。
+
+### 3. 最核心的属性 (Properties)
+
+这些属性通常用于配置服务器的安全性和性能。
+
+*   **`P server.listening`**
+    *   **作用**：一个布尔值，告诉你服务器当前是否正在工作（监听中）。
+
+*   **`P server.requestTimeout`**
+    *   **作用**：设置接收整个请求的超时时间（默认为 300,000 毫秒，即 5 分钟）。
+    *   **场景**：防止慢速攻击（Slowloris attacks）。如果客户端发数据发得特别慢，故意拖住服务器资源，这个超时配置会自动切断连接。
+
+*   **`P server.headersTimeout`**
+    *   **作用**：限制服务器等待接收 HTTP 标头的时间（默认为 60秒）。
+    *   **场景**：同样是为了安全，防止客户端连接后一直不发标头。
+
+---
+
+### 综合示例：把它们串起来
+
+这是一个包含了上述所有核心概念的“健壮”服务器代码：
+
+```javascript
+const http = require('node:http');
+
+// 1. 创建服务器 (实际上是定义 'request' 事件的处理逻辑)
+const server = http.createServer((req, res) => {
+  // 处理业务逻辑
+  res.writeHead(200);
+  res.end('Hello World');
+});
+
+// 2. 监听 clientError (处理异常连接)
+server.on('clientError', (err, socket) => {
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
+});
+
+// 3. 配置超时属性 (P - Properties)
+server.requestTimeout = 5000; // 5秒没发完请求就断开
+
+// 4. 启动服务器 (M - Method)
+server.listen(8000, () => {
+  console.log('服务器启动了:', server.listening); // true
+});
+
+// 5. 模拟 10秒后关闭 (M - Method)
+setTimeout(() => {
+  server.close(() => {
+    console.log('服务器已优雅关闭');
+  });
+}, 10000);
+```
