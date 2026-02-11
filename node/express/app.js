@@ -1,13 +1,12 @@
 import express from "express";
+import authorRouter from "./routes/authorRoutes.js";
+import bookRouter from "./routes/bookRoutes.js";
+import indexRouter from "./routes/indexRoutes.js";
 const app = express();
 
-app
-  .get("/", (req, res) => res.send("hello, world"))
-  .get("/:username/messages/:messageId", (req, res) => {
-    console.log(req.params);
-    res.send(req.params);
-    res.end();
-  });
+app.use("/author", authorRouter);
+app.use("/book", bookRouter);
+app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 3000;
 
