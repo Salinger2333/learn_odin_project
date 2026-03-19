@@ -17,10 +17,7 @@ app.use(express.static(assetsPath));
 app.use("/author", authorRouter);
 app.use("/book", bookRouter);
 app.use("/", indexRouter);
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).send();
-});
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.statusCode || 500).send(err.message);
