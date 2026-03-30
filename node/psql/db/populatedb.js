@@ -8,11 +8,25 @@ CREATE TABLE IF NOT EXISTS usernames (
   username VARCHAR ( 255 )
 );
 
-INSERT INTO usernames (username) 
+INSERT INTO usernames (username)
 VALUES
   ('Bryan'),
   ('Odin'),
-  ('Damon');
+  ('Damon'),
+  ('Alice'),
+  ('Bob'),
+  ('Charlie'),
+  ('David'),
+  ('Eve'),
+  ('Frank'),
+  ('Gracesup'),
+  ('Heidi'),
+  ('Ivansup'),
+  ('Judy'),
+  ('Kevin'),
+  ('Leo sup'),
+  ('Mallory'),
+  ('Nancy');
 `;
 
 async function main() {
