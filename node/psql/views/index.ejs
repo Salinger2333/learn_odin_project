@@ -6,6 +6,9 @@
     <title>Document</title>
   </head>
   <body>
+    <style>
+
+    </style>
     <form action="/search" method="get">
       <label for="username">Search Username:</label>
       <input type="text" id="search-username" name="username" required />
@@ -13,8 +16,14 @@
     </form>
     <ul>
       <% users.forEach(user => { %>
-        <li><%= user.username %></li>
+        <li><%= user.username %>
+          <form action="/delete/<%= user.id %>" 
+            method="POST" 
+            onsubmit="return confirm('Are you sure?');">                                                        <button type="submit">Delete</button>
+          </form> 
       <% }) %>
+        </li>
+        
     </ul>
   </body>
 </html>

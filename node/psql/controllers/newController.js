@@ -7,7 +7,7 @@ async function createUsernameGet(req, res) {
 async function createUsernamePost(req, res) {
   const { username } = req.body;
   await db.insertUsername(username);
-  res.redirect("/new/usernames");
+  res.redirect("/");
 }
 
 module.exports = {
