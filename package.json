@@ -24,5 +24,8 @@
     "node/*",
     "react/*",
     "react/*/*"
-  ]
+  ],
+  "dependencies": {
+    "@xyflow/react": "^12.11.1"
+  }
 }
