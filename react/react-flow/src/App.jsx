@@ -1,32 +1,20 @@
 import "./App.css";
-import {
-  Background,
-  Controls,
-  ReactFlow,
-  addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
-} from "@xyflow/react";
-import { initialNodes, initialEdges } from "./utils/initial";
+import { Background, Controls, ReactFlow } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useCallback, useState } from "react";
+import useStore from "./store/store";
+import { useShallow } from "zustand/react/shallow";
+
+const selector = (state) => ({
+  nodes: state.state,
+  edges: state.edges,
+  onNodesChange: state.onNodesChange,
+  onEdgesChange: state.onEdgesChange,
+  onConnect: state.onConnect,
+});
 
 function App() {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-  const onNodesChange = useCallback(
-    (changes) =>
-      setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
-    [],
-  );
-  const onEdgesChange = useCallback(
-    (changes) =>
-      setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
-    [],
-  );
-  const onConnect = useCallback(
-    (changes) => setEdges((edgesSnapshot) => addEdge(changes, edgesSnapshot)),
-    [],
+  const { nodes, edges, onNodesChange, onConnect, onEdgesChange } = useStore(
+    useShallow(selector),
   );
   return (
     <>
@@ -37,6 +25,8 @@ function App() {
           onEdgesChange={onEdgesChange}
           onNodesChange={onNodesChange}
           onConnect={onConnect}
+          fitView
+          colorMode="system"
         >
           <Background />
           <Controls />
