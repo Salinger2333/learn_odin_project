@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .container {
+        display: grid;
+        width: 80vw;
+        gap: 40px;
+        grid-template-columns: 200px;
+      }
+      .loading {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 5px solid #514e4e;
+        border-top-color: white;
+        animation: load 1s linear infinite;
+      }
+
+      @keyframes load {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .dots {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        background: #000;
+        border-radius: 50%;
+        animation: bounce 1.4s infinite;
+      }
+      .dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .dot:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+
+      .bar {
+        width: 40px;
+        height: 20px;
+        background-color: aqua;
+        animation: stretch 1s infinite;
+      }
+
+      @keyframes stretch {
+        50% {
+          height: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="loading"></div>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="bar"></div>
+    </div>
+  </body>
+</html>

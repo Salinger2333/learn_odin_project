@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="openBtn">open native dialog</button>
+
+    <dialog id="dialog">
+      <h2>I'm dialog</h2>
+      <form action="/api/post" method="post">
+        <label for="textInput">text</label>
+        <input id="textInput" name="text" type="text" />
+        <button id="submitBtn">submit</button>
+        <button id="cancelBtn">cancel</button>
+      </form>
+    </dialog>
+
+    <script>
+      const dialog = document.querySelector("#dialog");
+      const openBtn = document.querySelector("#openBtn");
+      const submitBtn = document.querySelector("#submitBtn");
+      const cancelBtn = document.querySelector("#cancelBtn");
+      openBtn.addEventListener("click", () => {
+        dialog.showModal();
+      });
+      submitBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.currentTarget.closest("dialog").close();
+        const textInput = document.querySelector("#textInput");
+        console.log(textInput.value);
+      });
+      cancelBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.currentTarget.closest("dialog").close();
+      });
+    </script>
+  </body>
+</html>
