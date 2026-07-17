@@ -24,7 +24,9 @@
     "node/*",
     "react/*",
     "react/*/*",
-    "typescript/*"
+    "typescript/*",
+    "interview/*",
+    "interview/*/*"
   ],
   "dependencies": {
     "@xyflow/react": "^12.11.1",
